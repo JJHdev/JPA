@@ -1,0 +1,21 @@
+1. Jpa를 사용할려면 JPA표준, 하이버네이트를 포함하는 라이브러리를 받아야한다. (hibernate-entitymanager)를 지정해서 받는다.
+  -. hibernate-core.jar
+  -. hibernate-jpa-2.1-api.jar
+  위 두개의 라이브러리도 자동적으로 다운받아진다.
+
+2. JPA 매핑
+  -. 객체    : Member  id  username  age
+  -. 테이블  : MEMBER  ID  NAME      AGE
+
+매핑방법 >> @Table(name="MEMBER")       >> @Entity가 붙은곳에서 Table의 정보를 지정
+        >> @Id                         >> pk
+        >> @Entity                     >> 이 클래스를 테이블과 매핑한다고 알려주는것 
+        >> @Column(name="NAME")        >> 필드를 컬럼에 매핑한다. 
+        매핑 어노테이션을 생략하면 필드명을 사용해서 컬럼명으로 매핑한다. (데이터베이스에서 대소문자를 구분시 구분해야한다.)
+
+3. JPA를 실행하기 위해서 가장 기본 설정 파일은 persiistence.xml 파일이다.
+  -. 이 설정파일은 META-INF/persistence.xml 경로에 있으면 별다른 설정 없이 JPA를 인식할수 있다.
+  -. persistence.xml에는 여러 설정이있는데 DB를 연결하기위해, jdbc드라이버(어떤 db인지?), 접속아이디, 비밀번호, 데이터베이스URL정보, hibernate.dialect(데이터베이스 방언)이라는 설정정보가 필수로 들어가야한다.
+  -. <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" /> 이렇게 설정되어있는데 방언이란 무엇일까?
+    -. 각 데이터베이스마다 고유특징이있는데 SQL표준을 안따르고 각 DB에서만 사용되는 문법들이 있다. 예로 MySQL에서는 LIMIT 를 사용하고, 오라클은 ROWNUM을 사용하는것처럼 SQL표준을 지키지 않는 문법때문에 방언을 설정한다.
+  -. 참고로 데이터베이스 방언을 설정하는 방법은 JPA에 표준화 되어 있지 않고 하이버네이트에서 다양한 데이터베이스 방언을 제공한다.
